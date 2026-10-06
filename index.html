@@ -31,7 +31,12 @@ body{
 
 #app{
   min-height:100vh;
-  background:linear-gradient(180deg,#080a0f 0%,#0d1119 55%,#090b10 100%);
+  background:linear-gradient(
+    180deg,
+    #080a0f 0%,
+    #0d1119 55%,
+    #090b10 100%
+  );
   padding-bottom:48px
 }
 
@@ -51,7 +56,11 @@ header{
   width:46px;
   height:46px;
   border-radius:14px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent2)
+  );
   display:grid;
   place-items:center;
   font-weight:900;
@@ -75,7 +84,13 @@ header{
   padding:25px;
   border:1px solid var(--border);
   border-radius:24px;
-  background:radial-gradient(circle at 90% 0,#7c5cff22,transparent 38%),var(--panel);
+  background:
+    radial-gradient(
+      circle at 90% 0,
+      #7c5cff22,
+      transparent 38%
+    ),
+    var(--panel);
   overflow:hidden
 }
 
@@ -161,7 +176,10 @@ main{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(
+    4,
+    minmax(0,1fr)
+  );
   gap:15px
 }
 
@@ -183,15 +201,66 @@ main{
   height:190px;
   display:flex;
   align-items:flex-end;
-  padding:14px;
-  background:linear-gradient(145deg,#252a3b,#10131a);
-  position:relative
+  padding:0;
+  background:linear-gradient(
+    145deg,
+    #252a3b,
+    #10131a
+  );
+  position:relative;
+  overflow:hidden
+}
+
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  position:absolute;
+  inset:0;
+  transition:.18s transform
+}
+
+.card:hover .cover img{
+  transform:scale(1.04)
+}
+
+.cover.missing img{
+  display:none
+}
+
+.cover:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    transparent 48%,
+    #000b 100%
+  );
+  pointer-events:none
 }
 
 .cover .initial{
-  font-size:48px;
+  position:absolute;
+  left:14px;
+  bottom:10px;
+  font-size:38px;
   font-weight:900;
-  opacity:.22
+  opacity:.22;
+  z-index:1
+}
+
+.cover .missing-label{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+  z-index:1;
+  width:90%
 }
 
 .badge{
@@ -202,7 +271,8 @@ main{
   border:1px solid #ffffff18;
   padding:5px 8px;
   border-radius:8px;
-  font-size:11px
+  font-size:11px;
+  z-index:2
 }
 
 .cardbody{
@@ -269,7 +339,14 @@ main{
   padding:20px;
   display:flex;
   align-items:flex-end;
-  background:linear-gradient(135deg,#27214a,#10232b)
+  background:
+    linear-gradient(
+      135deg,
+      #27214a,
+      #10232b
+    );
+  background-size:cover;
+  background-position:center
 }
 
 .dialog h2{
@@ -319,8 +396,12 @@ main{
 }
 
 @media(max-width:850px){
+
   .grid{
-    grid-template-columns:repeat(3,minmax(0,1fr))
+    grid-template-columns:repeat(
+      3,
+      minmax(0,1fr)
+    )
   }
 
   .cover{
@@ -329,6 +410,7 @@ main{
 }
 
 @media(max-width:620px){
+
   header{
     padding:20px 15px
   }
@@ -343,7 +425,10 @@ main{
   }
 
   .grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(
+      2,
+      minmax(0,1fr)
+    );
     gap:11px
   }
 
@@ -365,6 +450,7 @@ main{
 }
 
 @media(max-width:380px){
+
   .grid{
     grid-template-columns:1fr
   }
@@ -383,32 +469,44 @@ main{
 <header>
 
 <div class="brand">
-  <div class="logo">VP</div>
+
+  <div class="logo">
+    VP
+  </div>
 
   <div>
     <h1>VIP PRO GAMING</h1>
-    <p>Jl. Riau No.3 · Puncak Sekuning</p>
+    <p>
+      Jl. Riau No.3 · Puncak Sekuning
+    </p>
   </div>
+
 </div>
 
 <section class="hero">
 
-<h2>🎮 GAME LIBRARY</h2>
+  <h2>🎮 GAME LIBRARY</h2>
 
-<p>
-Cari game yang tersedia di VIP PRO GAMING.
-Pilih kategori atau ketik nama game untuk menemukan game dengan cepat.
-</p>
+  <p>
+    Cari game yang tersedia di VIP PRO GAMING.
+    Pilih kategori atau ketik nama game
+    untuk menemukan game dengan cepat.
+  </p>
 
-<div class="search">
-  <input
-    id="search"
-    placeholder="🔍 Cari nama game..."
-    autocomplete="off"
-  >
-</div>
+  <div class="search">
 
-<div class="count" id="count"></div>
+    <input
+      id="search"
+      placeholder="🔍 Cari nama game..."
+      autocomplete="off"
+    >
+
+  </div>
+
+  <div
+    class="count"
+    id="count">
+  </div>
 
 </section>
 
@@ -416,61 +514,109 @@ Pilih kategori atau ketik nama game untuk menemukan game dengan cepat.
 
 <main>
 
-<div class="filters" id="filters"></div>
+  <div
+    class="filters"
+    id="filters">
+  </div>
 
-<div class="section-title">
-  <h3 id="sectionTitle">Semua Game</h3>
-</div>
+  <div class="section-title">
 
-<div class="grid" id="grid"></div>
+    <h3 id="sectionTitle">
+      Semua Game
+    </h3>
+
+  </div>
+
+  <div
+    class="grid"
+    id="grid">
+  </div>
 
 </main>
 
-<div class="modal" id="modal">
+<div
+  class="modal"
+  id="modal">
 
-<div class="dialog">
+  <div class="dialog">
 
-<div class="dialogtop">
+    <div
+      class="dialogtop"
+      id="modalHero">
 
-<button class="close" id="close">✕</button>
+      <button
+        class="close"
+        id="close">
+        ✕
+      </button>
 
-<h2 id="modalTitle"></h2>
+      <h2 id="modalTitle"></h2>
 
-</div>
+    </div>
 
-<div class="dialogbody">
+    <div class="dialogbody">
 
-<div class="meta" id="modalTags"></div>
+      <div
+        class="meta"
+        id="modalTags">
+      </div>
 
-<div class="detailgrid">
+      <div class="detailgrid">
 
-<div class="detail">
-<small>Genre</small>
-<b id="modalGenre"></b>
-</div>
+        <div class="detail">
 
-<div class="detail">
-<small>Mode</small>
-<b id="modalMode"></b>
-</div>
+          <small>
+            Genre
+          </small>
 
-<div class="detail">
-<small>Status</small>
-<b>✓ Tersedia</b>
-</div>
+          <b id="modalGenre"></b>
 
-<div class="detail">
-<small>Platform</small>
-<b>PC</b>
-</div>
+        </div>
 
-</div>
+        <div class="detail">
 
-<p class="note" id="modalDesc"></p>
+          <small>
+            Mode
+          </small>
 
-</div>
+          <b id="modalMode"></b>
 
-</div>
+        </div>
+
+        <div class="detail">
+
+          <small>
+            Status
+          </small>
+
+          <b>
+            ✓ Tersedia
+          </b>
+
+        </div>
+
+        <div class="detail">
+
+          <small>
+            Platform
+          </small>
+
+          <b>
+            PC
+          </b>
+
+        </div>
+
+      </div>
+
+      <p
+        class="note"
+        id="modalDesc">
+      </p>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -478,122 +624,141 @@ Pilih kategori atau ketik nama game untuk menemukan game dengan cepat.
 
 <script>
 
-const games=[
+const games = [
 
-{
-  name:'Resident Evil Requiem',
-  genre:'Horror / Action',
-  mode:'Offline',
-  cat:'Horror',
-  latest:true,
-  image:'images/RE-Requiem.jpg',
-  desc:'Game survival horror terbaru yang tersedia di VIP PRO GAMING.'
-},
-  
-{
-  name:'Dune: Awakening',
-  genre:'Survival / RPG',
-  mode:'Offline',
-  cat:'RPG',
-  latest:true,
-  image:'images/DuneAwakening.jpg',
-  desc:'Bangun, bertahan hidup, dan jelajahi dunia Arrakis dalam pengalaman survival open-world.'
-},
+  {
+    name:'Resident Evil Requiem',
+    genre:'Horror / Action',
+    mode:'Offline',
+    cat:'Horror',
+    latest:true,
+    image:'images/RE-Requiem.jpg',
+    desc:'Game survival horror terbaru yang tersedia di VIP PRO GAMING.'
+  },
 
-{
-  name:'CODE VEIN II',
-  genre:'Action RPG',
-  mode:'Offline',
-  cat:'RPG',
-  cat:'RPG',
-  latest:true,
-  image:'images/CodeVein2.jpg',
-  desc:'Action RPG bergaya anime dengan pertarungan cepat dan eksplorasi dunia yang gelap.'
-},
+  {
+    name:'Dune: Awakening',
+    genre:'Survival / RPG',
+    mode:'Offline',
+    cat:'RPG',
+    latest:true,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/1172710/header.jpg',
+    desc:'Bangun, bertahan hidup, dan jelajahi dunia Arrakis dalam pengalaman survival open-world.'
+  },
 
-{
-  name:"Assassin's Creed Black Flag Resynced",
-  genre:'Action / Adventure',
-  mode:'Offline',
-  cat:'Action',
-  desc:'Petualangan bajak laut dan eksplorasi laut dalam dunia Assassin’s Creed.'
-},
+  {
+    name:'CODE VEIN II',
+    genre:'Action RPG',
+    mode:'Offline',
+    cat:'RPG',
+    latest:true,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/2362060/header.jpg',
+    desc:'Action RPG bergaya anime dengan pertarungan cepat dan eksplorasi dunia yang gelap.'
+  },
 
-{
-  name:'SILENT HILL: Townfall',
-  genre:'Horror',
-  mode:'Offline',
-  cat:'Horror',
-  desc:'Pengalaman horor psikologis dalam semesta Silent Hill.'
-},
+  {
+    name:"Assassin's Creed Black Flag Resynced",
+    genre:'Action / Adventure',
+    mode:'Offline',
+    cat:'Action',
+    latest:true,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/3751950/header.jpg',
+    desc:'Petualangan bajak laut dan eksplorasi laut dalam dunia Assassin’s Creed.'
+  },
 
-{
-  name:'The Witcher 3: Remastered',
-  genre:'RPG / Open World',
-  mode:'Offline',
-  cat:'RPG',
-  desc:'Petualangan Geralt of Rivia di dunia open-world yang luas.'
-},
+  {
+    name:'SILENT HILL: Townfall',
+    genre:'Horror',
+    mode:'Offline',
+    cat:'Horror',
+    latest:true,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/1636440/header.jpg',
+    desc:'Pengalaman horor psikologis dalam semesta Silent Hill.'
+  },
 
-{
-  name:'Frostpunk',
-  genre:'Strategy / Survival',
-  mode:'Offline',
-  cat:'Strategy',
-  desc:'Pimpin kota terakhir umat manusia dan bertahan dari cuaca ekstrem.'
-},
+  {
+    name:'The Witcher 3: Remastered',
+    genre:'RPG / Open World',
+    mode:'Offline',
+    cat:'RPG',
+    latest:true,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg',
+    desc:'Petualangan Geralt of Rivia di dunia open-world yang luas.'
+  },
 
-{
-  name:'Frostpunk 2',
-  genre:'Strategy / City Builder',
-  mode:'Offline',
-  cat:'Strategy',
-  desc:'Bangun masyarakat baru dan hadapi konflik sosial dalam dunia pasca-es.'
-},
+  {
+    name:'Frostpunk',
+    genre:'Strategy / Survival',
+    mode:'Offline',
+    cat:'Strategy',
+    latest:false,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/323190/header.jpg',
+    desc:'Pimpin kota terakhir umat manusia dan bertahan dari cuaca ekstrem.'
+  },
 
-{
-  name:'DOOM: The Dark Ages',
-  genre:'FPS / Action',
-  mode:'Offline',
-  cat:'Action',
-  desc:'Pertempuran brutal DOOM dalam setting medieval dark fantasy.'
-},
+  {
+    name:'Frostpunk 2',
+    genre:'Strategy / City Builder',
+    mode:'Offline',
+    cat:'Strategy',
+    latest:false,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/1601580/header.jpg',
+    desc:'Bangun masyarakat baru dan hadapi konflik sosial dalam dunia pasca-es.'
+  },
 
-{
-  name:'Football Life 2026',
-  genre:'Sports / Football',
-  mode:'Offline',
-  cat:'Sports',
-  desc:'Game sepak bola untuk sesi bermain santai maupun kompetitif.'
-},
+  {
+    name:'DOOM: The Dark Ages',
+    genre:'FPS / Action',
+    mode:'Offline',
+    cat:'Action',
+    latest:false,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/3017860/header.jpg',
+    desc:'Pertempuran brutal DOOM dalam setting medieval dark fantasy.'
+  },
 
-{
-  name:'Task Bar of Ragnalis',
-  genre:'Online RPG',
-  mode:'Online',
-  cat:'Online',
-  desc:'Game online yang dapat dimainkan melalui koneksi internet warnet.'
-},
+  {
+    name:'Football Life 2026',
+    genre:'Sports / Football',
+    mode:'Offline',
+    cat:'Sports',
+    latest:false,
+    image:'https://cdn2.steamgriddb.com/grid/6d48dfa9fa7de7487728cedddd1c0d8e.png',
+    desc:'Game sepak bola untuk sesi bermain santai maupun kompetitif.'
+  },
 
-{
-  name:'Architect: Land of Exiles',
-  genre:'Online / RPG',
-  mode:'Online',
-  cat:'Online',
-  desc:'Petualangan online dengan dunia fantasi dan sistem karakter.'
-},
+  {
+    name:'Task Bar of Ragnalis',
+    genre:'Online RPG',
+    mode:'Online',
+    cat:'Online',
+    latest:false,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/4830880/header.jpg',
+    desc:'Game online yang dapat dimainkan melalui koneksi internet warnet.'
+  },
 
-{
-  name:'Grand Theft Auto V',
-  genre:'Action / Open World',
-  mode:'Offline',
-  cat:'Action',
-  desc:'Open-world action klasik untuk menjelajahi Los Santos.'
-}
+  {
+    name:'Architect: Land of Exiles',
+    genre:'Online / RPG',
+    mode:'Online',
+    cat:'Online',
+    latest:false,
+    image:'https://img.youtube.com/vi/UxNvbonI8lg/maxresdefault.jpg',
+    desc:'Petualangan online dengan dunia fantasi dan sistem karakter.'
+  },
+
+  {
+    name:'Grand Theft Auto V',
+    genre:'Action / Open World',
+    mode:'Offline',
+    cat:'Action',
+    latest:false,
+    image:'https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg',
+    desc:'Open-world action klasik untuk menjelajahi Los Santos.'
+  }
 
 ];
 
-const cats=[
+const cats = [
   'Semua',
   'Terbaru',
   'Action',
@@ -604,23 +769,27 @@ const cats=[
   'Online'
 ];
 
-let active='Semua';
+let active = 'Semua';
 
-const filters=document.getElementById('filters');
+const filters =
+  document.getElementById('filters');
 
-cats.forEach(c=>{
+cats.forEach(c => {
 
-  const b=document.createElement('button');
+  const b =
+    document.createElement('button');
 
-  b.textContent=c;
+  b.textContent = c;
 
-  b.onclick=()=>{
+  b.onclick = () => {
 
-    active=c;
+    active = c;
 
     document
       .querySelectorAll('.filters button')
-      .forEach(x=>x.classList.remove('active'));
+      .forEach(x =>
+        x.classList.remove('active')
+      );
 
     b.classList.add('active');
 
@@ -628,7 +797,7 @@ cats.forEach(c=>{
 
   };
 
-  if(c==='Semua'){
+  if(c === 'Semua'){
     b.classList.add('active');
   }
 
@@ -636,50 +805,99 @@ cats.forEach(c=>{
 
 });
 
-const search=document.getElementById('search');
-const grid=document.getElementById('grid');
-const count=document.getElementById('count');
-const title=document.getElementById('sectionTitle');
+const search =
+  document.getElementById('search');
 
-search.addEventListener('input',render);
+const grid =
+  document.getElementById('grid');
+
+const count =
+  document.getElementById('count');
+
+const title =
+  document.getElementById('sectionTitle');
+
+search.addEventListener(
+  'input',
+  render
+);
 
 function render(){
 
-  let q=search.value.toLowerCase().trim();
+  let q =
+    search.value
+      .toLowerCase()
+      .trim();
 
-  let list=games.filter(g=>
-    (
-      active==='Semua' ||
-      active==='Terbaru' ||
-      g.cat===active
-    )
-    &&
-    (
-      g.name.toLowerCase().includes(q) ||
-      g.genre.toLowerCase().includes(q) ||
-      g.mode.toLowerCase().includes(q)
-    )
-  );
+  let list =
+    games.filter(g =>
 
-  title.textContent=
-    active==='Semua'
+      (
+        active === 'Semua' ||
+        (
+          active === 'Terbaru' &&
+          g.latest
+        ) ||
+        g.cat === active
+      )
+
+      &&
+
+      (
+        g.name
+          .toLowerCase()
+          .includes(q) ||
+
+        g.genre
+          .toLowerCase()
+          .includes(q) ||
+
+        g.mode
+          .toLowerCase()
+          .includes(q)
+      )
+
+    );
+
+  title.textContent =
+    active === 'Semua'
       ? 'Semua Game'
       : active;
 
-  count.textContent=
+  count.textContent =
     `${list.length} game tersedia`;
 
-  grid.innerHTML=
+  grid.innerHTML =
+
     list.length
-    ?
-    list.map(g=>`
+
+      ?
+
+    list.map(g => `
 
       <article
         class="card"
-        data-name="${g.name.replaceAll('"','&quot;')}"
+        data-name="${g.name.replaceAll(
+          '"',
+          '&quot;'
+        )}"
       >
 
         <div class="cover">
+
+          <img
+            src="${g.image}"
+            alt="${g.name}"
+            loading="lazy"
+            onerror="
+              this.style.display='none';
+              this.parentElement.classList.add('missing');
+              this.insertAdjacentHTML(
+                'beforeend',
+                '<span class=&quot;missing-label&quot;>Cover belum tersedia</span>'
+              )
+            "
+          >
 
           <span class="badge">
             ${g.mode}
@@ -688,10 +906,10 @@ function render(){
           <span class="initial">
             ${
               g.name
-              .split(/\s+/)
-              .slice(0,2)
-              .map(x=>x[0])
-              .join('')
+                .split(/\s+/)
+                .slice(0,2)
+                .map(x => x[0])
+                .join('')
             }
           </span>
 
@@ -710,7 +928,9 @@ function render(){
             </span>
 
             <span class="tag">
-              ${g.genre.split('/')[0].trim()}
+              ${g.genre
+                .split('/')[0]
+                .trim()}
             </span>
 
           </div>
@@ -721,48 +941,84 @@ function render(){
 
     `).join('')
 
-    :
+      :
 
     `
       <div class="empty">
-        Tidak ada game yang cocok dengan pencarian.
+        Tidak ada game yang cocok
+        dengan pencarian.
       </div>
     `;
 
   grid
     .querySelectorAll('.card')
-    .forEach(c=>
-      c.onclick=()=>
+    .forEach(c =>
+
+      c.onclick = () =>
         openGame(c.dataset.name)
+
     );
 
 }
 
 function openGame(name){
 
-  const g=games.find(x=>x.name===name);
+  const g =
+    games.find(
+      x => x.name === name
+    );
 
-  if(!g)return;
+  if(!g) return;
 
-  document.getElementById('modalTitle').textContent=g.name;
+  document
+    .getElementById('modalTitle')
+    .textContent = g.name;
 
-  document.getElementById('modalGenre').textContent=g.genre;
+  document
+    .getElementById('modalGenre')
+    .textContent = g.genre;
 
-  document.getElementById('modalMode').textContent=g.mode;
+  document
+    .getElementById('modalMode')
+    .textContent = g.mode;
 
-  document.getElementById('modalDesc').textContent=g.desc;
+  document
+    .getElementById('modalDesc')
+    .textContent = g.desc;
 
-  document.getElementById('modalTags').innerHTML=`
+  document
+    .getElementById('modalTags')
+    .innerHTML = `
 
-    <span class="tag">
-      ${g.cat}
-    </span>
+      <span class="tag">
+        ${g.cat}
+      </span>
 
-    <span class="tag">
-      ${g.mode}
-    </span>
+      <span class="tag">
+        ${g.mode}
+      </span>
 
+    `;
+
+  const hero =
+    document.getElementById(
+      'modalHero'
+    );
+
+  hero.style.backgroundImage = `
+    linear-gradient(
+      180deg,
+      #0002 35%,
+      #000b 100%
+    ),
+    url("${g.image}")
   `;
+
+  hero.style.backgroundSize =
+    'cover';
+
+  hero.style.backgroundPosition =
+    'center';
 
   document
     .getElementById('modal')
@@ -770,18 +1026,29 @@ function openGame(name){
 
 }
 
-document.getElementById('close').onclick=()=>
-  document
-    .getElementById('modal')
-    .classList.remove('show');
+document
+  .getElementById('close')
+  .onclick = () => {
 
-document.getElementById('modal').onclick=e=>{
+    document
+      .getElementById('modal')
+      .classList.remove('show');
 
-  if(e.target.id==='modal'){
-    e.currentTarget.classList.remove('show');
-  }
+  };
 
-};
+document
+  .getElementById('modal')
+  .onclick = e => {
+
+    if(e.target.id === 'modal'){
+
+      e.currentTarget
+        .classList
+        .remove('show');
+
+    }
+
+  };
 
 render();
 
