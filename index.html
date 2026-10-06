@@ -1,1 +1,776 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIP PRO GAMING — Game Library</title>
 
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#090b10;
+  --panel:#11151d;
+  --panel2:#171c26;
+  --text:#f5f7fb;
+  --muted:#9ba5b5;
+  --accent:#7c5cff;
+  --accent2:#00d4ff;
+  --border:#252c38
+}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
+  color:var(--text)
+}
+
+#app{
+  min-height:100vh;
+  background:linear-gradient(180deg,#080a0f 0%,#0d1119 55%,#090b10 100%);
+  padding-bottom:48px
+}
+
+header{
+  padding:28px 20px 22px;
+  max-width:1180px;
+  margin:auto
+}
+
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center
+}
+
+.logo{
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:white;
+  box-shadow:0 8px 30px #00d4ff25
+}
+
+.brand h1{
+  font-size:22px;
+  margin:0
+}
+
+.brand p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:13px
+}
+
+.hero{
+  margin-top:24px;
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:radial-gradient(circle at 90% 0,#7c5cff22,transparent 38%),var(--panel);
+  overflow:hidden
+}
+
+.hero h2{
+  font-size:clamp(26px,5vw,42px);
+  margin:0 0 8px
+}
+
+.hero p{
+  color:var(--muted);
+  margin:0 0 20px;
+  max-width:650px
+}
+
+.search{
+  display:flex;
+  gap:10px
+}
+
+.search input{
+  flex:1;
+  min-width:0;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#0b0e14;
+  color:var(--text);
+  font-size:15px;
+  outline:none
+}
+
+.search input:focus{
+  border-color:var(--accent)
+}
+
+.count{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:14px
+}
+
+main{
+  max-width:1180px;
+  margin:auto;
+  padding:0 20px
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding:20px 0 15px;
+  scrollbar-width:none
+}
+
+.filters button{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--muted);
+  padding:9px 14px;
+  border-radius:999px;
+  cursor:pointer
+}
+
+.filters button.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:transparent
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0 15px
+}
+
+.section-title h3{
+  margin:0;
+  font-size:20px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px
+}
+
+.card{
+  border:1px solid var(--border);
+  background:var(--panel);
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.18s transform,.18s border-color
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#6252c9
+}
+
+.cover{
+  height:190px;
+  display:flex;
+  align-items:flex-end;
+  padding:14px;
+  background:linear-gradient(145deg,#252a3b,#10131a);
+  position:relative
+}
+
+.cover .initial{
+  font-size:48px;
+  font-weight:900;
+  opacity:.22
+}
+
+.badge{
+  position:absolute;
+  top:11px;
+  left:11px;
+  background:#080a0dcc;
+  border:1px solid #ffffff18;
+  padding:5px 8px;
+  border-radius:8px;
+  font-size:11px
+}
+
+.cardbody{
+  padding:13px
+}
+
+.card h4{
+  margin:0 0 7px;
+  font-size:15px;
+  line-height:1.3
+}
+
+.meta{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:11px
+}
+
+.tag{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  padding:4px 7px;
+  border-radius:7px
+}
+
+.empty{
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed var(--border);
+  border-radius:18px;
+  grid-column:1/-1
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#000b;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  padding:15px;
+  z-index:10
+}
+
+.modal.show{
+  display:flex
+}
+
+.dialog{
+  width:min(700px,100%);
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  max-height:90vh;
+  overflow-y:auto
+}
+
+.dialogtop{
+  height:230px;
+  padding:20px;
+  display:flex;
+  align-items:flex-end;
+  background:linear-gradient(135deg,#27214a,#10232b)
+}
+
+.dialog h2{
+  margin:0;
+  font-size:27px
+}
+
+.dialogbody{
+  padding:20px
+}
+
+.close{
+  float:right;
+  border:0;
+  background:var(--panel2);
+  color:var(--text);
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  cursor:pointer
+}
+
+.detailgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px
+}
+
+.detail{
+  padding:12px;
+  background:var(--panel2);
+  border-radius:12px
+}
+
+.detail small{
+  display:block;
+  color:var(--muted);
+  margin-bottom:3px
+}
+
+.note{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))
+  }
+
+  .cover{
+    height:170px
+  }
+}
+
+@media(max-width:620px){
+  header{
+    padding:20px 15px
+  }
+
+  .hero{
+    padding:20px;
+    border-radius:20px
+  }
+
+  main{
+    padding:0 15px
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:11px
+  }
+
+  .cover{
+    height:145px
+  }
+
+  .cardbody{
+    padding:11px
+  }
+
+  .card h4{
+    font-size:14px
+  }
+
+  .detailgrid{
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:380px){
+  .grid{
+    grid-template-columns:1fr
+  }
+
+  .cover{
+    height:180px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<header>
+
+<div class="brand">
+  <div class="logo">VP</div>
+
+  <div>
+    <h1>VIP PRO GAMING</h1>
+    <p>Jl. Riau No.3 · Puncak Sekuning</p>
+  </div>
+</div>
+
+<section class="hero">
+
+<h2>🎮 GAME LIBRARY</h2>
+
+<p>
+Cari game yang tersedia di VIP PRO GAMING.
+Pilih kategori atau ketik nama game untuk menemukan game dengan cepat.
+</p>
+
+<div class="search">
+  <input
+    id="search"
+    placeholder="🔍 Cari nama game..."
+    autocomplete="off"
+  >
+</div>
+
+<div class="count" id="count"></div>
+
+</section>
+
+</header>
+
+<main>
+
+<div class="filters" id="filters"></div>
+
+<div class="section-title">
+  <h3 id="sectionTitle">Semua Game</h3>
+</div>
+
+<div class="grid" id="grid"></div>
+
+</main>
+
+<div class="modal" id="modal">
+
+<div class="dialog">
+
+<div class="dialogtop">
+
+<button class="close" id="close">✕</button>
+
+<h2 id="modalTitle"></h2>
+
+</div>
+
+<div class="dialogbody">
+
+<div class="meta" id="modalTags"></div>
+
+<div class="detailgrid">
+
+<div class="detail">
+<small>Genre</small>
+<b id="modalGenre"></b>
+</div>
+
+<div class="detail">
+<small>Mode</small>
+<b id="modalMode"></b>
+</div>
+
+<div class="detail">
+<small>Status</small>
+<b>✓ Tersedia</b>
+</div>
+
+<div class="detail">
+<small>Platform</small>
+<b>PC</b>
+</div>
+
+</div>
+
+<p class="note" id="modalDesc"></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const games=[
+
+{
+  name:'Dune: Awakening',
+  genre:'Survival / RPG',
+  mode:'Offline',
+  cat:'RPG',
+  desc:'Bangun, bertahan hidup, dan jelajahi dunia Arrakis dalam pengalaman survival open-world.'
+},
+
+{
+  name:'CODE VEIN II',
+  genre:'Action RPG',
+  mode:'Offline',
+  cat:'RPG',
+  desc:'Action RPG bergaya anime dengan pertarungan cepat dan eksplorasi dunia yang gelap.'
+},
+
+{
+  name:"Assassin's Creed Black Flag Resynced",
+  genre:'Action / Adventure',
+  mode:'Offline',
+  cat:'Action',
+  desc:'Petualangan bajak laut dan eksplorasi laut dalam dunia Assassin’s Creed.'
+},
+
+{
+  name:'SILENT HILL: Townfall',
+  genre:'Horror',
+  mode:'Offline',
+  cat:'Horror',
+  desc:'Pengalaman horor psikologis dalam semesta Silent Hill.'
+},
+
+{
+  name:'The Witcher 3: Remastered',
+  genre:'RPG / Open World',
+  mode:'Offline',
+  cat:'RPG',
+  desc:'Petualangan Geralt of Rivia di dunia open-world yang luas.'
+},
+
+{
+  name:'Frostpunk',
+  genre:'Strategy / Survival',
+  mode:'Offline',
+  cat:'Strategy',
+  desc:'Pimpin kota terakhir umat manusia dan bertahan dari cuaca ekstrem.'
+},
+
+{
+  name:'Frostpunk 2',
+  genre:'Strategy / City Builder',
+  mode:'Offline',
+  cat:'Strategy',
+  desc:'Bangun masyarakat baru dan hadapi konflik sosial dalam dunia pasca-es.'
+},
+
+{
+  name:'DOOM: The Dark Ages',
+  genre:'FPS / Action',
+  mode:'Offline',
+  cat:'Action',
+  desc:'Pertempuran brutal DOOM dalam setting medieval dark fantasy.'
+},
+
+{
+  name:'Football Life 2026',
+  genre:'Sports / Football',
+  mode:'Offline',
+  cat:'Sports',
+  desc:'Game sepak bola untuk sesi bermain santai maupun kompetitif.'
+},
+
+{
+  name:'Task Bar of Ragnalis',
+  genre:'Online RPG',
+  mode:'Online',
+  cat:'Online',
+  desc:'Game online yang dapat dimainkan melalui koneksi internet warnet.'
+},
+
+{
+  name:'Architect: Land of Exiles',
+  genre:'Online / RPG',
+  mode:'Online',
+  cat:'Online',
+  desc:'Petualangan online dengan dunia fantasi dan sistem karakter.'
+},
+
+{
+  name:'Grand Theft Auto V',
+  genre:'Action / Open World',
+  mode:'Offline',
+  cat:'Action',
+  desc:'Open-world action klasik untuk menjelajahi Los Santos.'
+}
+
+];
+
+const cats=[
+  'Semua',
+  'Terbaru',
+  'Action',
+  'RPG',
+  'Sports',
+  'Strategy',
+  'Horror',
+  'Online'
+];
+
+let active='Semua';
+
+const filters=document.getElementById('filters');
+
+cats.forEach(c=>{
+
+  const b=document.createElement('button');
+
+  b.textContent=c;
+
+  b.onclick=()=>{
+
+    active=c;
+
+    document
+      .querySelectorAll('.filters button')
+      .forEach(x=>x.classList.remove('active'));
+
+    b.classList.add('active');
+
+    render();
+
+  };
+
+  if(c==='Semua'){
+    b.classList.add('active');
+  }
+
+  filters.appendChild(b);
+
+});
+
+const search=document.getElementById('search');
+const grid=document.getElementById('grid');
+const count=document.getElementById('count');
+const title=document.getElementById('sectionTitle');
+
+search.addEventListener('input',render);
+
+function render(){
+
+  let q=search.value.toLowerCase().trim();
+
+  let list=games.filter(g=>
+    (
+      active==='Semua' ||
+      active==='Terbaru' ||
+      g.cat===active
+    )
+    &&
+    (
+      g.name.toLowerCase().includes(q) ||
+      g.genre.toLowerCase().includes(q) ||
+      g.mode.toLowerCase().includes(q)
+    )
+  );
+
+  title.textContent=
+    active==='Semua'
+      ? 'Semua Game'
+      : active;
+
+  count.textContent=
+    `${list.length} game tersedia`;
+
+  grid.innerHTML=
+    list.length
+    ?
+    list.map(g=>`
+
+      <article
+        class="card"
+        data-name="${g.name.replaceAll('"','&quot;')}"
+      >
+
+        <div class="cover">
+
+          <span class="badge">
+            ${g.mode}
+          </span>
+
+          <span class="initial">
+            ${
+              g.name
+              .split(/\s+/)
+              .slice(0,2)
+              .map(x=>x[0])
+              .join('')
+            }
+          </span>
+
+        </div>
+
+        <div class="cardbody">
+
+          <h4>
+            ${g.name}
+          </h4>
+
+          <div class="meta">
+
+            <span class="tag">
+              ${g.cat}
+            </span>
+
+            <span class="tag">
+              ${g.genre.split('/')[0].trim()}
+            </span>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join('')
+
+    :
+
+    `
+      <div class="empty">
+        Tidak ada game yang cocok dengan pencarian.
+      </div>
+    `;
+
+  grid
+    .querySelectorAll('.card')
+    .forEach(c=>
+      c.onclick=()=>
+        openGame(c.dataset.name)
+    );
+
+}
+
+function openGame(name){
+
+  const g=games.find(x=>x.name===name);
+
+  if(!g)return;
+
+  document.getElementById('modalTitle').textContent=g.name;
+
+  document.getElementById('modalGenre').textContent=g.genre;
+
+  document.getElementById('modalMode').textContent=g.mode;
+
+  document.getElementById('modalDesc').textContent=g.desc;
+
+  document.getElementById('modalTags').innerHTML=`
+
+    <span class="tag">
+      ${g.cat}
+    </span>
+
+    <span class="tag">
+      ${g.mode}
+    </span>
+
+  `;
+
+  document
+    .getElementById('modal')
+    .classList.add('show');
+
+}
+
+document.getElementById('close').onclick=()=>
+  document
+    .getElementById('modal')
+    .classList.remove('show');
+
+document.getElementById('modal').onclick=e=>{
+
+  if(e.target.id==='modal'){
+    e.currentTarget.classList.remove('show');
+  }
+
+};
+
+render();
+
+</script>
+
+</body>
+</html>
